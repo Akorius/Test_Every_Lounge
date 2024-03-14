@@ -1,0 +1,5 @@
+NSLocationAlwaysAndWhenInUseUsageDescription = "Для расчета маршрутов и определения ближайших аэропортов";
+NSLocationAlwaysUsageDescription = "Для расчета маршрутов и определения ближайших аэропортов";
+NSLocationUsageDescription = "Для расчета маршрутов и определения ближайших аэропортов";
+NSLocationWhenInUseUsageDescription = "Для расчета маршрутов и определения ближайших аэропортов";
+NSPhotoLibraryUsageDescription = "Для выбора аватара пользователя";

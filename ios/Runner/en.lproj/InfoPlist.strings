@@ -1,0 +1,5 @@
+NSLocationAlwaysAndWhenInUseUsageDescription = "To determine the direction and location of the nearest airports";
+NSLocationAlwaysUsageDescription = "To determine the direction and location of the nearest airports";
+NSLocationUsageDescription = "To determine the direction and location of the nearest airports";
+NSLocationWhenInUseUsageDescription = "To determine the direction and location of the nearest airports";
+NSPhotoLibraryUsageDescription = "Need to set profile avatar";

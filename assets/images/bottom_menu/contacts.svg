@@ -1,0 +1,8 @@
+<svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M12.875 3H10.875C5.90444 3 1.875 7.02944 1.875 12V17C1.875 19.2091 3.66586 21 5.875 21H12.875C17.8456 21 21.875 16.9706 21.875 12C21.875 7.02944 17.8456 3 12.875 3Z"
+        fill="#BABABA" opacity="0.5" />
+    <circle cx="12.125" cy="12.25" fill="#BABABA" r="1.25" />
+    <circle cx="16.125" cy="12.25" fill="#BABABA" r="1.25" />
+    <circle cx="8.125" cy="12.25" fill="#BABABA" r="1.25" />
+</svg>

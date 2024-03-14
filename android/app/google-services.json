@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "1055014541217",
+    "project_id": "every-lounge",
+    "storage_bucket": "every-lounge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055014541217:android:46935cddbac21eb7de9de0",
+        "android_client_info": {
+          "package_name": "com.everylounge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055014541217-5vvck8kbg52stom25h0vie2j7g0mh3hq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.everylounge",
+            "certificate_hash": "1c7cfa428f79b91cc0e2b1c28ad695214e53d488"
+          }
+        },
+        {
+          "client_id": "1055014541217-citnql427392nv3mmshsbu50aglop8df.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.everylounge",
+            "certificate_hash": "fd9e46f48389dc25de856f7cd1e2fd09849339bd"
+          }
+        },
+        {
+          "client_id": "1055014541217-sn9ron03occb12g62ce7hojjp8p2n94h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.everylounge",
+            "certificate_hash": "88c708fad563edf20cac11ce7ed6c2abc38531c8"
+          }
+        },
+        {
+          "client_id": "1055014541217-n67dl388hec3o4nmb3fcojjf72j6ikui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqOYTsn8myV1QvnMeEyUsY9TONuTHzt-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055014541217-n67dl388hec3o4nmb3fcojjf72j6ikui.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1055014541217-8t8001vv364jrq0qnsohsc8bc3a8eeaf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.everylounge"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
