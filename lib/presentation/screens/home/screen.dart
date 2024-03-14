@@ -7,6 +7,8 @@ import 'package:everylounge/presentation/screens/home/widget/active_products_lis
 import 'package:everylounge/presentation/screens/home/widget/app_home_shimmer.dart';
 import 'package:everylounge/presentation/screens/home/widget/profile.dart';
 import 'package:everylounge/presentation/screens/home/widget/services_list.dart';
+import 'package:everylounge/presentation/widgets/loaders/app_loader.dart';
+import 'package:everylounge/presentation/widgets/loaders/app_refresh_indicator.dart';
 import 'package:everylounge/presentation/widgets/loaders/circular.dart';
 import 'package:everylounge/presentation/widgets/scaffold/common.dart';
 import 'package:everylounge/presentation/widgets/snackbar/snackbar.dart';
@@ -54,13 +56,8 @@ class HomeScreen extends StatelessWidget {
           context.showSnackbar(message);
         }
       },
-      child: CustomRefreshIndicator(
+      child: AppRefreshIndicator(
         onRefresh: () => context.read<HomeCubit>().getOrderList(),
-        builder: MaterialIndicatorDelegate(
-          builder: (context, controller) {
-            return const Padding(padding: EdgeInsets.all(8), child: AppCircularProgressIndicator());
-          },
-        ),
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (BuildContext context, state) {
             return Scaffold(
@@ -70,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 21, bottom: 24, left: 16, right: 16),
+                    padding: EdgeInsets.only(top: state.isOrdersLoadingByRefresh ? 0 : 21, bottom: 24, left: 16, right: 16),
                     child: GestureDetector(
                       onTap: () {
                         state.user?.authType != AuthType.anon

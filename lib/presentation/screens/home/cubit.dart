@@ -161,7 +161,9 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> getOrderList() async {
+    emit(state.copyWith(isOrdersLoadingByRefresh: true));
     await _orderUseCase.get(limit: 3, statuses: toShowOrderStatusesInActive);
+    emit(state.copyWith(isOrdersLoadingByRefresh: false));
   }
 
   onProductsPageChanged(int index) {

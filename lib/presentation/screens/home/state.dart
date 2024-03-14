@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class HomeState extends Equatable {
   final bool profileLoading;
   final bool ordersLoading;
+  final bool isOrdersLoadingByRefresh;
   final bool cardsLoading;
   final bool addCardModalWasShown;
   final bool cardAttaching;
@@ -26,6 +27,7 @@ class HomeState extends Equatable {
   const HomeState({
     this.profileLoading = true,
     this.ordersLoading = true,
+    this.isOrdersLoadingByRefresh = false,
     this.cardsLoading = true,
     this.addCardModalWasShown = false,
     this.cardAttaching = false,
@@ -46,6 +48,7 @@ class HomeState extends Equatable {
   List<Object?> get props => [
         profileLoading,
         ordersLoading,
+        isOrdersLoadingByRefresh,
         cardsLoading,
         addCardModalWasShown,
         cardAttaching,
@@ -65,6 +68,7 @@ class HomeState extends Equatable {
   HomeState copyWith({
     bool? profileLoading,
     bool? ordersLoading,
+    bool? isOrdersLoadingByRefresh,
     bool? cardsLoading,
     bool? addCardModalWasShown,
     bool? cardAttaching,
@@ -83,6 +87,7 @@ class HomeState extends Equatable {
     return HomeState(
       profileLoading: profileLoading ?? this.profileLoading,
       ordersLoading: ordersLoading ?? this.ordersLoading,
+      isOrdersLoadingByRefresh: isOrdersLoadingByRefresh ?? this.isOrdersLoadingByRefresh,
       cardsLoading: cardsLoading ?? this.cardsLoading,
       addCardModalWasShown: addCardModalWasShown ?? this.addCardModalWasShown,
       cardAttaching: cardAttaching ?? this.cardAttaching,

@@ -6,6 +6,7 @@ import 'package:everylounge/presentation/screens/history/widgets/app_bar.dart';
 import 'package:everylounge/presentation/screens/history/widgets/history_list.dart';
 import 'package:everylounge/presentation/screens/history/widgets/zero_sells_body.dart';
 import 'package:everylounge/presentation/widgets/loaders/app_loader.dart';
+import 'package:everylounge/presentation/widgets/loaders/app_refresh_indicator.dart';
 import 'package:everylounge/presentation/widgets/loaders/circular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,16 +21,8 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colors.profileBackgroundColor,
       appBar: const HistoryAppBar(),
-      body: CustomRefreshIndicator(
+      body: AppRefreshIndicator(
         onRefresh: () => context.read<HistoryCubit>().getOrderList(),
-        builder: MaterialIndicatorDelegate(
-          withRotation: false,
-          elevation: 1,
-          backgroundColor: Colors.white,
-          builder: (context, controller) {
-            return const Padding(padding: EdgeInsets.all(6), child: EveryAppLoader());
-          },
-        ),
         child: BlocBuilder<HistoryCubit, HistoryState>(
           builder: (context, state) {
             return !state.isLoading
