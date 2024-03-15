@@ -39,7 +39,7 @@ dependencies:
 
   #network
   dio: 4.0.4 #http client 4.0.4 work well with web, 4.0.6 work bad
-  firebase_core: 2.25.4 #firebase services
+  firebase_core: ^2.25.4 #firebase services
   firebase_remote_config: 4.3.14 #for fetching credentials from remote
   firebase_analytics: 10.8.6 # for working  [firebase_remote_config]
   grpc: 3.2.4

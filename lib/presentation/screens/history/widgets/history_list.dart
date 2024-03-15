@@ -48,41 +48,44 @@ class _HistoryListState extends State<HistoryList> {
           left: 16,
           right: 16,
         ),
-        child: CustomScrollView(
-          controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            SliverToBoxAdapter(
-              child: StickyGroupedListView<Order, DateTime>(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                stickyHeaderBackgroundColor: context.colors.backgroundColor,
-                elements: widget.ordersList!,
-                groupBy: (Order e) => DateTime(e.createdAt.year, e.createdAt.month, e.createdAt.day),
-                groupSeparatorBuilder: (Order element) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0, top: 16),
-                  child: Text(
-                    DateFormat('d MMMM y', 'ru_RU').format(element.createdAt),
-                    style: context.textStyles.negativeButtonText(
-                      color: context.colors.textHistoryDate,
+        child: ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: CustomScrollView(
+            controller: _scrollController,
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              SliverToBoxAdapter(
+                child: StickyGroupedListView<Order, DateTime>(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  stickyHeaderBackgroundColor: context.colors.backgroundColor,
+                  elements: widget.ordersList!,
+                  groupBy: (Order e) => DateTime(e.createdAt.year, e.createdAt.month, e.createdAt.day),
+                  groupSeparatorBuilder: (Order element) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0, top: 16),
+                    child: Text(
+                      DateFormat('d MMMM y', 'ru_RU').format(element.createdAt),
+                      style: context.textStyles.negativeButtonText(
+                        color: context.colors.textHistoryDate,
+                      ),
                     ),
                   ),
-                ),
-                groupComparator: (a, b) => a.compareTo(b),
-                order: StickyGroupedListOrder.DESC,
-                itemBuilder: (context, order) {
-                  return HistoryItem(order: order);
-                },
-              ),
-            ),
-            if (widget.isLoadingNewPage)
-              const SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.only(right: 15, bottom: 15),
-                  child: EveryAppLoader(size: 32),
+                  groupComparator: (a, b) => a.compareTo(b),
+                  order: StickyGroupedListOrder.DESC,
+                  itemBuilder: (context, order) {
+                    return HistoryItem(order: order);
+                  },
                 ),
               ),
-          ],
+              if (widget.isLoadingNewPage)
+                const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 15, bottom: 15),
+                    child: EveryAppLoader(size: 32),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -101,5 +104,14 @@ class _HistoryListState extends State<HistoryList> {
     if (maxScroll - currentScroll <= delta) {
       context.read<HistoryCubit>().getNextOrdersPage();
     }
+  }
+}
+
+//класс, убирающий ScrollGlow без изменения физики действия списка
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
   }
 }

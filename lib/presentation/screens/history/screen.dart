@@ -1,4 +1,5 @@
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
+import 'package:everylounge/domain/entities/order/order.dart';
 import 'package:everylounge/presentation/common/theme/theme.dart';
 import 'package:everylounge/presentation/screens/history/cubit.dart';
 import 'package:everylounge/presentation/screens/history/state.dart';
@@ -36,7 +37,13 @@ class HistoryScreen extends StatelessWidget {
                 ? state.ordersList.isEmpty
                     ? const ZeroSellBody()
                     : HistoryList(
-                        ordersList: state.ordersList,
+                        // ordersList: state.ordersList,
+                        ordersList: [
+                          ...List.generate(
+                            10,
+                            (index) => Order.mock(),
+                          ),
+                        ],
                         isLoadingNewPage: state.isLoadingNewPage,
                       )
                 : const Center(

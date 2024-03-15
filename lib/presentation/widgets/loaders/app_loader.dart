@@ -1,3 +1,4 @@
+import 'package:everylounge/presentation/common/assets/assets.dart';
 import 'package:everylounge/presentation/common/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -114,7 +115,7 @@ class _EveryAppLoaderState extends State<EveryAppLoader> with SingleTickerProvid
         child: Stack(
           children: [
             SvgPicture.asset(
-              "assets/images/loader/empty.svg",
+              AppImages.loaderEmpty,
               width: widget.size,
               height: widget.size,
               color: widget.forSplash == true ? context.colors.textLight : null,
@@ -124,7 +125,7 @@ class _EveryAppLoaderState extends State<EveryAppLoader> with SingleTickerProvid
               builder: (context, child) {
                 return Opacity(
                   opacity: _opacityAnimation.value,
-                  child: SvgPicture.asset("assets/images/loader/first.svg", width: widget.size, height: widget.size),
+                  child: SvgPicture.asset(AppImages.loaderFirst, width: widget.size, height: widget.size),
                 );
               },
             ),
@@ -133,7 +134,7 @@ class _EveryAppLoaderState extends State<EveryAppLoader> with SingleTickerProvid
               builder: (context, child) {
                 return Opacity(
                   opacity: _opacityAnimationSecond.value,
-                  child: SvgPicture.asset("assets/images/loader/second.svg", width: widget.size, height: widget.size),
+                  child: SvgPicture.asset(AppImages.loaderSecond, width: widget.size, height: widget.size),
                 );
               },
             ),
@@ -142,7 +143,7 @@ class _EveryAppLoaderState extends State<EveryAppLoader> with SingleTickerProvid
               builder: (context, child) {
                 return Opacity(
                   opacity: _opacityAnimationThird.value,
-                  child: SvgPicture.asset("assets/images/loader/third.svg", width: widget.size, height: widget.size),
+                  child: SvgPicture.asset(AppImages.loaderThird, width: widget.size, height: widget.size),
                 );
               },
             ),
@@ -151,7 +152,7 @@ class _EveryAppLoaderState extends State<EveryAppLoader> with SingleTickerProvid
               builder: (context, child) {
                 return Opacity(
                   opacity: _opacityAnimationFull.value,
-                  child: SvgPicture.asset("assets/images/loader/full.svg", width: widget.size, height: widget.size),
+                  child: SvgPicture.asset(AppImages.loaderFull, width: widget.size, height: widget.size),
                 );
               },
             ),
