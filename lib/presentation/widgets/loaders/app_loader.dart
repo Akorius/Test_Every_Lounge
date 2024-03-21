@@ -107,56 +107,61 @@ class _EveryAppLoaderState extends State<EveryAppLoader> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: widget.size ?? 32,
-        width: widget.size ?? 32,
-        alignment: Alignment.center,
-        child: Stack(
-          children: [
-            SvgPicture.asset(
-              AppImages.loaderEmpty,
-              width: widget.size,
-              height: widget.size,
-              color: widget.forSplash == true ? context.colors.textLight : null,
-            ),
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: SvgPicture.asset(AppImages.loaderFirst, width: widget.size, height: widget.size),
-                );
-              },
-            ),
-            AnimatedBuilder(
-              animation: _controllerSecond,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _opacityAnimationSecond.value,
-                  child: SvgPicture.asset(AppImages.loaderSecond, width: widget.size, height: widget.size),
-                );
-              },
-            ),
-            AnimatedBuilder(
-              animation: _controllerThird,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _opacityAnimationThird.value,
-                  child: SvgPicture.asset(AppImages.loaderThird, width: widget.size, height: widget.size),
-                );
-              },
-            ),
-            AnimatedBuilder(
-              animation: _controllerFull,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _opacityAnimationFull.value,
-                  child: SvgPicture.asset(AppImages.loaderFull, width: widget.size, height: widget.size),
-                );
-              },
-            ),
-          ],
+    return SizedBox(
+      height: _controller.value * 100,
+      child: Center(
+        child: Container(
+          height: widget.size ?? 32,
+          width: widget.size ?? 32,
+          alignment: Alignment.center,
+          child: Stack(
+            children: [
+              SvgPicture.asset(
+                AppImages.loaderEmpty,
+                width: widget.size,
+                height: widget.size,
+                color: widget.forSplash == true ? context.colors.textLight : null,
+              ),
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return Opacity(
+                    opacity: _opacityAnimation.value,
+                    child: SvgPicture.asset(AppImages.loaderFirst, width: widget.size, height: widget.size),
+                  );
+                },
+              ),
+              AnimatedBuilder(
+                animation: _controllerSecond,
+                builder: (context, child) {
+                  return Opacity(
+                    opacity: _opacityAnimationSecond.value,
+                    child: SvgPicture.asset(AppImages.loaderSecond, width: widget.size, height: widget.size),
+                  );
+                },
+              ),
+              AnimatedBuilder(
+                animation: _controllerThird,
+                builder: (context, child) {
+                  return Opacity(
+                    opacity: _opacityAnimationThird.value,
+                    child: SvgPicture.asset(AppImages.loaderThird, width: widget.size, height: widget.size),
+                  );
+                },
+              ),
+              AnimatedBuilder(
+                animation: _controllerFull,
+                builder: (context, child) {
+                  return SizedBox(
+                    child: Opacity(
+                      opacity: _opacityAnimationFull.value,
+                      child: SvgPicture.asset(AppImages.loaderFull, width: widget.size, height: widget.size),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

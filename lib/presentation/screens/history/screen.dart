@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryScreen extends StatelessWidget {
   static const path = "history";
+  final double _offsetToArmed = 85;
 
   const HistoryScreen({Key? key}) : super(key: key);
 
@@ -21,17 +22,40 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colors.profileBackgroundColor,
       appBar: const HistoryAppBar(),
-      body: CustomRefreshIndicator(
-        onRefresh: () => context.read<HistoryCubit>().getOrderList(),
-        builder: MaterialIndicatorDelegate(
-          withRotation: false,
-          elevation: 1,
-          backgroundColor: Colors.white,
-          builder: (context, controller) {
-            return const Padding(padding: EdgeInsets.all(6), child: EveryAppLoader());
-          },
-        ),
-        child: BlocBuilder<HistoryCubit, HistoryState>(
+      // body: CustomRefreshIndicator(
+      //   onRefresh: () => Future.delayed(const Duration(seconds: 5), () async {
+      //     await context.read<HistoryCubit>().getOrderList();
+      //   }),
+      //   offsetToArmed: _offsetToArmed,
+      //   builder: MaterialIndicatorDelegate(
+      //     withRotation: false,
+      //     elevation: 0,
+      //     backgroundColor: Colors.transparent,
+      //     builder: (context, controller) {
+      //       // return const Padding(padding: EdgeInsets.all(6), child: EveryAppLoader());
+      //       return AnimatedBuilder(
+      //         animation: controller,
+      //         builder: (context, child) {
+      //           return Stack(
+      //             clipBehavior: Clip.hardEdge,
+      //             children: <Widget>[
+      //               if (!controller.side.isNone)
+      //                 SizedBox(
+      //                   height: _offsetToArmed * controller.value,
+      //                   // color: const Color(0xFFFDFEFF),
+      //                   width: double.infinity,
+      //                   child: const Padding(
+      //                     padding: EdgeInsets.all(6),
+      //                     child: EveryAppLoader(),
+      //                   ),
+      //                 ),
+      //             ],
+      //           );
+      //         },
+      //       );
+      //     },
+      //   ),
+        body: BlocBuilder<HistoryCubit, HistoryState>(
           builder: (context, state) {
             return !state.isLoading
                 ? state.ordersList.isEmpty
@@ -51,7 +75,7 @@ class HistoryScreen extends StatelessWidget {
                   );
           },
         ),
-      ),
+      // ),
     );
   }
 }
