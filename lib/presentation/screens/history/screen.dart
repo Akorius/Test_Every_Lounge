@@ -1,4 +1,3 @@
-import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:everylounge/domain/entities/order/order.dart';
 import 'package:everylounge/presentation/common/theme/theme.dart';
 import 'package:everylounge/presentation/screens/history/cubit.dart';
@@ -6,14 +5,12 @@ import 'package:everylounge/presentation/screens/history/state.dart';
 import 'package:everylounge/presentation/screens/history/widgets/app_bar.dart';
 import 'package:everylounge/presentation/screens/history/widgets/history_list.dart';
 import 'package:everylounge/presentation/screens/history/widgets/zero_sells_body.dart';
-import 'package:everylounge/presentation/widgets/loaders/app_loader.dart';
 import 'package:everylounge/presentation/widgets/loaders/circular.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HistoryScreen extends StatelessWidget {
   static const path = "history";
-  final double _offsetToArmed = 85;
 
   const HistoryScreen({Key? key}) : super(key: key);
 
@@ -22,60 +19,26 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colors.profileBackgroundColor,
       appBar: const HistoryAppBar(),
-      // body: CustomRefreshIndicator(
-      //   onRefresh: () => Future.delayed(const Duration(seconds: 5), () async {
-      //     await context.read<HistoryCubit>().getOrderList();
-      //   }),
-      //   offsetToArmed: _offsetToArmed,
-      //   builder: MaterialIndicatorDelegate(
-      //     withRotation: false,
-      //     elevation: 0,
-      //     backgroundColor: Colors.transparent,
-      //     builder: (context, controller) {
-      //       // return const Padding(padding: EdgeInsets.all(6), child: EveryAppLoader());
-      //       return AnimatedBuilder(
-      //         animation: controller,
-      //         builder: (context, child) {
-      //           return Stack(
-      //             clipBehavior: Clip.hardEdge,
-      //             children: <Widget>[
-      //               if (!controller.side.isNone)
-      //                 SizedBox(
-      //                   height: _offsetToArmed * controller.value,
-      //                   // color: const Color(0xFFFDFEFF),
-      //                   width: double.infinity,
-      //                   child: const Padding(
-      //                     padding: EdgeInsets.all(6),
-      //                     child: EveryAppLoader(),
-      //                   ),
-      //                 ),
-      //             ],
-      //           );
-      //         },
-      //       );
-      //     },
-      //   ),
-        body: BlocBuilder<HistoryCubit, HistoryState>(
-          builder: (context, state) {
-            return !state.isLoading
-                ? state.ordersList.isEmpty
-                    ? const ZeroSellBody()
-                    : HistoryList(
-                        // ordersList: state.ordersList,
-                        ordersList: [
-                          ...List.generate(
-                            10,
-                            (index) => Order.mock(),
-                          ),
-                        ],
-                        isLoadingNewPage: state.isLoadingNewPage,
-                      )
-                : const Center(
-                    child: AppCircularProgressIndicator.large(),
-                  );
-          },
-        ),
-      // ),
+      body: BlocBuilder<HistoryCubit, HistoryState>(
+        builder: (context, state) {
+          return !state.isLoading
+              ? state.ordersList.isEmpty
+                  ? const ZeroSellBody()
+                  : HistoryList(
+                      // ordersList: state.ordersList,
+                      ordersList: [
+                        ...List.generate(
+                          10,
+                          (index) => Order.mock(),
+                        ),
+                      ],
+                      isLoadingNewPage: state.isLoadingNewPage,
+                    )
+              : const Center(
+                  child: AppCircularProgressIndicator.large(),
+                );
+        },
+      ),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:everylounge/domain/entities/order/order.dart';
 import 'package:everylounge/presentation/common/sticky_grouped_list/src/sticky_grouped_list.dart';
 import 'package:everylounge/presentation/common/sticky_grouped_list/src/sticky_grouped_list_order.dart';
@@ -6,6 +5,7 @@ import 'package:everylounge/presentation/common/textstyles/textstyles.dart';
 import 'package:everylounge/presentation/common/theme/theme.dart';
 import 'package:everylounge/presentation/screens/history/cubit.dart';
 import 'package:everylounge/presentation/screens/history/widgets/history_item.dart';
+import 'package:everylounge/presentation/screens/history/widgets/refresher.dart';
 import 'package:everylounge/presentation/widgets/loaders/app_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +28,6 @@ class HistoryList extends StatefulWidget {
 class _HistoryListState extends State<HistoryList> {
   final ScrollController _scrollController = ScrollController();
   bool isRefreshing = false;
-  final double _offsetToArmed = 85.0;
 
   @override
   void initState() {
@@ -53,38 +52,8 @@ class _HistoryListState extends State<HistoryList> {
         ),
         child: ScrollConfiguration(
           behavior: MyBehavior(),
-          child: CustomRefreshIndicator(
-            onRefresh: () => context.read<HistoryCubit>().getOrderList(),
-            offsetToArmed: _offsetToArmed,
-            builder: MaterialIndicatorDelegate(
-              withRotation: false,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              builder: (context, controller) {
-                // return const Padding(padding: EdgeInsets.all(6), child: EveryAppLoader());
-                return AnimatedBuilder(
-                  animation: controller,
-                  builder: (context, child) {
-                    return Stack(
-                      clipBehavior: Clip.hardEdge,
-                      children: <Widget>[
-                        if (!controller.side.isNone)
-                          SizedBox(
-                            height: _offsetToArmed * controller.value,
-                            // color: const Color(0xFFFDFEFF),
-                            width: double.infinity,
-                            child: const Padding(
-                              padding: EdgeInsets.all(6),
-                              child: EveryAppLoader(),
-                            ),
-                          ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
-            child: CustomScrollView(
+          child: Refresher(
+            wchild: CustomScrollView(
               controller: _scrollController,
               physics: const AlwaysScrollableScrollPhysics(),
               slivers: [
