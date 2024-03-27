@@ -131,6 +131,10 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
     emit(state.copyWith(isSharing: false));
   }
 
+  Future<void> refreshOrder() async {
+    _orderUseCase.getOrder(orderId: state.order.id.toString());
+  }
+
   sendEventError(String event) {
     _metricsUseCase.sendEvent(event: event, type: MetricsEventType.alert);
   }

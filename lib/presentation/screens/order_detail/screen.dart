@@ -50,6 +50,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> with WidgetsBin
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    context.read<OrderDetailsCubit>().refreshOrder();
   }
 
   @override
