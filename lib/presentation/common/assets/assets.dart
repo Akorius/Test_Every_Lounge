@@ -242,4 +242,11 @@ class AppImages {
 
   ///history
   static const String historyZeroOrders = "assets/images/history/history_sell_logo.png";
+
+  ///app loader
+  static const String loaderEmpty = "assets/images/loader/empty.svg";
+  static const String loaderFirst = "assets/images/loader/first.svg";
+  static const String loaderSecond = "assets/images/loader/second.svg";
+  static const String loaderThird = "assets/images/loader/third.svg";
+  static const String loaderFull = "assets/images/loader/full.svg";
 }

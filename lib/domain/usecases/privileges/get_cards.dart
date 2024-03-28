@@ -7,6 +7,7 @@ import 'package:everylounge/domain/entities/bank/bank.dart';
 import 'package:everylounge/domain/entities/bank/card.dart';
 import 'package:everylounge/domain/entities/common/logger.dart';
 import 'package:everylounge/domain/entities/common/result.dart';
+import 'package:everylounge/domain/entities/login/passage.dart';
 import 'package:everylounge/domain/usecases/privileges/synchronize_cards.dart';
 import 'package:everylounge/domain/usecases/user/get_user.dart';
 import 'package:everylounge/domain/usecases/user/tinkoff_pass.dart';
@@ -120,7 +121,7 @@ class GetCardsUseCaseImpl implements GetCardsUseCase {
   void addCardsByPassage(List<BankCard> cards) {
     ///Подставляем карты на основе банковских программ, добавленных по номеру телефона
     final passages = _userStorage.passages;
-    // passages.add(Passage.mock());
+    passages.add(Passage.mock());
     final user = _userStorage.user;
     for (final passage in passages) {
       cards.insert(0, BankCard.phoneFakeFromProfile(passage, passage.bank == user?.activePassage?.bank));

@@ -2,7 +2,7 @@ import 'package:everylounge/domain/entities/common/platform.dart';
 import 'package:everylounge/presentation/common/assets/assets.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
-const production = true;
+const production = false;
 
 const metricsKey = '63485d30-5442-44f9-b28c-78f7709f366b';
 const metricsDebugKey = '4ab70217-1ce0-41b9-ba8f-8b49431e1d8d';
