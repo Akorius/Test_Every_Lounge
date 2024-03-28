@@ -20,6 +20,8 @@ import 'package:rxdart/rxdart.dart';
 abstract class GetUserOrdersUseCase {
   Future<Result<OrderData>> get({int? limit, List<OrderStatus>? statuses, int? page, bool? needRefresh = false});
 
+  Future<Result<Order?>> getOrder({required String orderId});
+
   Future<Result<List<Order>>> getNextOrdersPage({int? page, List<OrderStatus>? statuses, int? limit});
 
   Stream<List<Order>> get stream;
@@ -37,6 +39,11 @@ class GetUserOrdersUseCaseImplMock implements GetUserOrdersUseCase {
 
   @override
   addOrderToStream(Order order) {}
+
+  @override
+  Future<Result<Order?>> getOrder({required String orderId}) async {
+   return Result.success(null); 
+  }
 
   @override
   Future<Result<OrderData>> get({int? limit, List<OrderStatus>? statuses, int? page, bool? needRefresh = false}) async {
@@ -71,6 +78,31 @@ class GetUserOrdersUseCaseImpl implements GetUserOrdersUseCase {
     if (PlatformWrap.isWeb) {
       _watchOrdersStatusesWeb(event);
     }
+  }
+
+  // _addStorageOrdersToStream() {
+  //   _orderController.add(_ordersStorage.orders!);
+  //   if (PlatformWrap.isWeb) {
+  //     _watchOrdersStatusesWeb(_ordersStorage.orders!);
+  //   }
+  // }
+
+  @override
+  Future<Result<Order?>> getOrder({required String orderId}) async {
+    late final Order orderData;
+    try {
+      orderData = await _orderApi.getOrder(orderId);
+    } catch (e, s) {
+      Log.exception(e, s, "GetUserOrdersUseCaseImpl");
+      return Result.failure('Не удалось получить заказы.');
+    }
+    // saveOrdersInStorage([orderData], needRefresh: false);
+    addOrderToStream(orderData);
+
+    ///Добавляем заказы в стриму
+    // _addStorageOrdersToStream();
+    _addOrdersToStream(_ordersStorage.orders ?? []);
+    return Result.success(orderData);
   }
 
   @override

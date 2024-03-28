@@ -75,6 +75,8 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       await _passageManager?.checkPassage(order.lounge);
     }
 
+    refreshOrder();
+
     emit(state.copyWith(cardsLoading: false, activeCard: () => activeCard));
   }
 
@@ -129,6 +131,10 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       _messageController.add(shareResult.message);
     }
     emit(state.copyWith(isSharing: false));
+  }
+
+  Future<void> refreshOrder() async {
+    _orderUseCase.getOrder(orderId: state.order.id.toString());
   }
 
   sendEventError(String event) {
