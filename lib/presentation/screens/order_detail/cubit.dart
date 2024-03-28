@@ -75,6 +75,8 @@ class OrderDetailsCubit extends Cubit<OrderDetailsState> {
       await _passageManager?.checkPassage(order.lounge);
     }
 
+    refreshOrder();
+
     emit(state.copyWith(cardsLoading: false, activeCard: () => activeCard));
   }
 

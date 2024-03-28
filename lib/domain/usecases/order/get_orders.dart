@@ -80,12 +80,12 @@ class GetUserOrdersUseCaseImpl implements GetUserOrdersUseCase {
     }
   }
 
-  _addStorageOrdersToStream() {
-    _orderController.add(_ordersStorage.orders!);
-    if (PlatformWrap.isWeb) {
-      _watchOrdersStatusesWeb(_ordersStorage.orders!);
-    }
-  }
+  // _addStorageOrdersToStream() {
+  //   _orderController.add(_ordersStorage.orders!);
+  //   if (PlatformWrap.isWeb) {
+  //     _watchOrdersStatusesWeb(_ordersStorage.orders!);
+  //   }
+  // }
 
   @override
   Future<Result<Order?>> getOrder({required String orderId}) async {
@@ -96,10 +96,12 @@ class GetUserOrdersUseCaseImpl implements GetUserOrdersUseCase {
       Log.exception(e, s, "GetUserOrdersUseCaseImpl");
       return Result.failure('Не удалось получить заказы.');
     }
-    saveOrdersInStorage([orderData], needRefresh: false);
+    // saveOrdersInStorage([orderData], needRefresh: false);
+    addOrderToStream(orderData);
 
     ///Добавляем заказы в стриму
-    _addStorageOrdersToStream();
+    // _addStorageOrdersToStream();
+    _addOrdersToStream(_ordersStorage.orders ?? []);
     return Result.success(orderData);
   }
 
